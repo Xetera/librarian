@@ -2,6 +2,8 @@
 
 An elasticsearch instance for querying data found in https://github.com/manami-project/anime-offline-database
 
+**Public API**: https://api.weebsearch.com/search/title:new%20game
+
 ## Querying
 Response format 
 ```
