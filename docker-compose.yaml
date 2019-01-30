@@ -1,0 +1,30 @@
+version: "3.5"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.0
+    container_name: elasticsearch
+    environment:
+      discovery.type: single-node
+    restart: always
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    networks:
+      - esnet
+  flask:
+    container_name: flask
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3030:3030"
+    environment:
+      LIBRARIAN_ES_URL: http://elasticsearch
+      LIBRARIAN_PRODUCTION: "True"
+      LIBRARIAN_KEY: "123"
+    networks:
+      - esnet
+volumes:
+  esdata:
+networks:
+  esnet:
